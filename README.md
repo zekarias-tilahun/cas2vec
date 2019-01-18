@@ -15,7 +15,7 @@ $ python cas2vec/main.py --cas-path data/train.txt
 
 #### Input format
 Each Line is assoiated with a cascade id followed by a sequence of infection events separated by white space. 
-An infection event contains a pair (node_id, timestamp), timestamp should be relative and in seconds. 
+An infection event contains a pair (node_id,timestamp), timestamp should be relative and in seconds. 
 That is, the timestamp of the first event is 0, and for the rest the time stamps are simply the difference 
 (in seconds) between the current event the previous event.
 For example:
