@@ -19,37 +19,54 @@ Each Line is assoiated with a cascade id followed by a sequence of infection eve
 
 >`--cas-path:`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A path to cascade file. Default is empty string.
+
 >`--model-dir:`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A path to a directory to save a trained model. Default is ```../models```
+
 >`--obs-time:`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An observation time. Default is 1 hour
+
 >`--prd-time:`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A Prediction time (it should be greater than --obs-time, i.e. --obs-time + d). Default is 16 hours
+
 >`--time-unit:`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The time unit used to specify the previous two parameters (possible values are, h for hour, m for minute, and s for second). Default is 'h'
+
 >`--disc_method:`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The discretization method to be used possible values are (counter, const). Default is counter.
+
 >`--num-bins:`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The number of bins (slices). Default is 40
+
 >`--sequence-length:`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sequence length, relevant when the `--disc-method` is 'const'. Default is 100
+
 >`--threshold:`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A virality threshold. Default is 1000
+
 >`--dev-ratio:`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The fraction of points to be used as a development set. Default is 0.2. Set it to 0 during test.
+
 >`--kernel-size:`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A list of kerne sizes to be used in the `Convolutional Layer`. Default is empty, but internally it will be set to -- [3, 4]
+
 >`--filters:`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A list of numbers associated with the number of filters for each kernel size in the above argument. Default is empty, but internally it will be set to -- [32, 16].
+
 >`--fcc-layers:`. A list containing the configuration for the `Fully Connected Layer`, which comes after the `Convolutional Layer` and before the `Prediction Layer`. Default is empty, but internally it is set to -- [512, 128].
+
 >`--size:`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The embedding size related to the `Cascade Embedding Matrix`. Default is 128.
+
 >`--lr:`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Learning rate. Default is 0.0001
+
 >`--batch-size:`.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Batch size. Default is 32
+
 >`--epochs:`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number of epochs. Default is 10
+
 >`--sf:`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sampling factor used to control the number of non-viral cascades.  Default is 1. The number of non-vrial cascades is proportional to the number of viral cascades by a factor `--sf`
 
