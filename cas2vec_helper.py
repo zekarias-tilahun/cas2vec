@@ -120,15 +120,6 @@ def build_config(args):
     return config
 
 
-def init(config):
-    cascades = load_cascades(config['cas_path'])
-    processed_cascades = process_observation_prediction_events(
-        cascades=cascades,
-        obs_time=config['observation_time'],
-        prd_time=config['prediction_time'])
-    return processed_cascades
-
-
 def pretty_display(args):
     for arg in vars(args):
         print('{}: {}'.format(arg, getattr(args, arg)))

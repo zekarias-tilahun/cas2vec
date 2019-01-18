@@ -1,5 +1,6 @@
-from cas2vec_helper import build_config, init, pretty_display
-from cas2vec import run, cas2vec_model
+from cas2vec_helper import (build_config, load_cascades,
+                            process_observation_prediction_events)
+from cas2vec import run_cas2vec, cas2vec_model
 import argparse
 
 
@@ -68,12 +69,13 @@ def parser_args():
 
 def main():
     args = parser_args()
-    pretty_display(args)
     config = build_config(args)
-    model_config = cas2vec_model(config)
-
-    # processed_cascades = init(config)
-    # run(processed_cascades, config)
+    cascades = load_cascades(config['cas_path'])
+    processed_cascades = process_observation_prediction_events(
+        cascades=cascades,
+        obs_time=config['observation_time'],
+        prd_time=config['prediction_time'])
+    run_cas2vec(processed_cascades, config)
 
 
 if __name__ == '__main__':

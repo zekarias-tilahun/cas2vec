@@ -154,7 +154,7 @@ def cas2vec_model(config):
     }
 
 
-def run(processed_cascades, config):
+def run_cas2vec(processed_cascades, config):
     model_config = cas2vec_model(config)
     print(model_config['model'].summary())
     transformed_cascades = cas2vec_transform(
