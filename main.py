@@ -65,15 +65,15 @@ def parser_args():
 
 
 def main():
-    print(argparse.__version__)
-    # args = parser_args()
-    # config = build_config(args)
-    # cascades = load_cascades(config['cas_path'])
-    # processed_cascades = process_observation_prediction_events(
-    #     cascades=cascades,
-    #     obs_time=config['observation_time'],
-    #     prd_time=config['prediction_time'])
-    # run_cas2vec(processed_cascades, config)
+
+    args = parser_args()
+    config = build_config(args)
+    cascades = load_cascades(config['cas_path'])
+    processed_cascades = process_observation_prediction_events(
+        cascades=cascades,
+        obs_time=config['observation_time'],
+        prd_time=config['prediction_time'])
+    run_cas2vec(processed_cascades, config)
 
 
 if __name__ == '__main__':
