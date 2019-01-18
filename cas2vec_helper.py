@@ -1,6 +1,7 @@
 import tensorflow as tf
 import numpy as np
 import random
+import os
 
 
 def load_cascades(path):
@@ -133,7 +134,7 @@ def build_config(args):
     vocab = build_vocab(args=args)
     tcf = time_conversion_factor(args.time_unit)
     config = {
-        'cas_path': args.cas_path, 'model_dir': args.model_dir,
+        'cas_path': args.cas_path,
         'time_unit': args.time_unit, 'num_bins': args.num_bins,
         'observation_time': args.obs_time * tcf,
         'prediction_time': args.prd_time * tcf,
@@ -148,6 +149,15 @@ def build_config(args):
         'metrics': [precision, recall, fmeasure],
         'epochs': args.epochs, 'batch_size': args.batch_size
     }
+    filter_conf = 'filter_{}'.format('_'.join(
+        str(val) for val in config['filters']))
+    kernel_conf = 'kernel_{}'.format('_'.join(
+        str(val) for val in config['kernel_size']))
+    fcc_conf = 'fcc_{}'.format('_'.join(
+        str(val) for val in config['fcc_layers']))
+    config['model_path'] = os.path.join(
+        config['model_dir'],
+        '{}_{}'.format(filter_conf, kernel_conf, fcc_conf))
     return config
 
 

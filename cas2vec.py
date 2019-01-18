@@ -172,6 +172,10 @@ def run_cas2vec(processed_cascades, config):
     :return:
     """
     model_config = cas2vec_model(config)
+    check_point = tf.keras.callbacks.ModelCheckpoint(
+        config['model_path'], save_weights_only=True,
+        save_best_only=True, monitor='val_fmeasure', mode='max', verbose=1)
+
     transformed_cascades = cas2vec_transform(
         processed_cascades, config['bins'], disc_method=config['disc_method'],
         sequence_length=config['sequence_length'])
@@ -185,7 +189,8 @@ def run_cas2vec(processed_cascades, config):
     label_inputs = sampling_results['label'][indices]
     model_config['model'].fit(
         x=sequence_inputs, y=label_inputs, validation_split=config['dev_ratio'], 
-        epochs=config['epochs'], batch_size=config['batch_size'])
+        epochs=config['epochs'], batch_size=config['batch_size'],
+        callbacks=[check_point])
 
 
 
