@@ -100,6 +100,7 @@ def build_cnn_layer(embedding_layer, config):
     :return:
     """
     layers = []
+    print(config['filters'])
     for i in range(len(config['filters'])):
         cnn_layer = tf.keras.layers.Conv1D(
             kernel_regularizer=tf.keras.regularizers.l2(0.0001),
@@ -121,6 +122,7 @@ def build_mlp(input_, config):
     :param config: The configuration
     :return:
     """
+    print(config['fcc_layers'])
     current_input = input_
     for i in range(len(config['fcc_layers']) - 1):
         current_input = tf.keras.layers.Dense(
