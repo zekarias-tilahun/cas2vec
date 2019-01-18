@@ -124,6 +124,7 @@ def build_config(args):
         'metrics': [precision, recall, fmeasure],
         'epochs': args.epochs, 'batch_size': args.batch_size
     }
+    print(config)
     return config
 
 

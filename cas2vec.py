@@ -90,7 +90,7 @@ def build_cnn_input(config):
         input_dim=len(config['vocab']), output_dim=config['emb_size'],
         input_length=config['sequence_length'],
         name='embedding_layer')(input_layer)
-    print(input_layer, embedding_layer)
+    
     return input_layer, embedding_layer
 
 
