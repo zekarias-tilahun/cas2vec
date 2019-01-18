@@ -122,8 +122,8 @@ def build_mlp(input_, config):
     :param config: The configuration
     :return:
     """
-    print(config['fcc_layers'])
     current_input = input_
+    print(current_input)
     for i in range(len(config['fcc_layers']) - 1):
         current_input = tf.keras.layers.Dense(
             units=config['fcc_layers'][i], activation='tanh',
@@ -145,6 +145,7 @@ def cas2vec_model(config):
     """
     input_layer, embedding_layer = build_cnn_input(config)
     fcc_layer = build_cnn_layer(embedding_layer, config)
+    print(fcc_layer)
     cascade_embedding_layer, prediction_layer = build_mlp(fcc_layer, config)
     model = tf.keras.models.Model(
         inputs=input_layer, outputs=prediction_layer)
