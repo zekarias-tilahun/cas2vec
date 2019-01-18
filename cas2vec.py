@@ -83,12 +83,14 @@ def build_cnn_input(config):
     :param config: The configuration
     :return:
     """
+    print('Building input to cnn layer')
     input_layer = tf.keras.layers.Input(
         shape=(config['sequence_length'],), name='input_sequence')
     embedding_layer = tf.keras.layers.Embedding(
         input_dim=len(config['vocab']), output_dim=config['emb_size'],
         input_length=config['sequence_length'],
         name='embedding_layer')(input_layer)
+    print(input_layer, embedding_layer)
     return input_layer, embedding_layer
 
 
@@ -143,7 +145,7 @@ def cas2vec_model(config):
     :return:
     """
     input_layer, embedding_layer = build_cnn_input(config)
-    print(input_layer, embedding_layer)
+
     fcc_layer = build_cnn_layer(embedding_layer, config)
     cascade_embedding_layer, prediction_layer = build_mlp(fcc_layer, config)
     model = tf.keras.models.Model(
