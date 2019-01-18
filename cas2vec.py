@@ -100,7 +100,6 @@ def build_cnn_layer(embedding_layer, config):
     :return:
     """
     layers = []
-    print(config['filters'])
     for i in range(len(config['filters'])):
         cnn_layer = tf.keras.layers.Conv1D(
             kernel_regularizer=tf.keras.regularizers.l2(0.0001),
@@ -144,8 +143,8 @@ def cas2vec_model(config):
     :return:
     """
     input_layer, embedding_layer = build_cnn_input(config)
+    print(input_layer, embedding_layer)
     fcc_layer = build_cnn_layer(embedding_layer, config)
-    print(fcc_layer)
     cascade_embedding_layer, prediction_layer = build_mlp(fcc_layer, config)
     model = tf.keras.models.Model(
         inputs=input_layer, outputs=prediction_layer)
