@@ -27,7 +27,7 @@ def parser_args():
                              'Default is 16 hours')
     parser.add_argument('--num-bins', type=int, default=40,
                         help='The number of bins(slices)')
-    parser.add_argument('--seq-len', type=int, nargs=100,
+    parser.add_argument('--seq-len', type=int, default=100,
                         help='The length of the sequence that is used as input '
                              'to the CNN. If --disc-method is counter, this is '
                              'the same as --num-bins')
