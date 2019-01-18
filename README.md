@@ -37,7 +37,8 @@ A path to a directory to save a trained model. Default is ```./models```
 An observation time. Default is 1 hour
 
 >`--prd-time:`
-A Prediction time (it should be greater than --obs-time, i.e. --obs-time + d). Default is 16 hours
+A Prediction time (it should be greater than --obs-time, i.e. --obs-time + delta, delta > 0). 
+Default is 16 hours
 
 >`--time-unit:`
 The time unit used to specify the previous two parameters (possible values are, h for hour, m for minute, and s for second). Default is 'h'
