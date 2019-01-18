@@ -39,20 +39,21 @@ def _build_constant_sequence(events, bins):
         timestamps = events[last_pos:]
         event_count = trace(timestamps, endtime=bins[i]).shape[0]
         if event_count > 0:
-            entry = [i] * event_count
+            entry = [i + 1] * event_count
             constant_sequence = constant_sequence + entry
         last_pos = last_pos + event_count
 
     return constant_sequence
 
 
-def cas2vec_transform(data, bins, disc_method):
+def cas2vec_transform(data, bins, disc_method, sequence_length):
     """
     Transform diffusion event data into discrete valued sequences as described
     in the cas2vec paper by using bins (slices)
     :param data: Cascade data
     :param bins: Bins (slices)
     :param disc_method: discretization method
+    :param sequence_length The sequence length
     :return:
     """
     print('Transforming cascades according to the {} discretization method'.format(disc_method))
@@ -68,6 +69,10 @@ def cas2vec_transform(data, bins, disc_method):
         output['sequence'].append(counter_sequence)
         output['label'].append(num_prd_events)
     output['sequence'] = np.array(output['sequence'])
+    if disc_method == 'const':
+        output['sequence'] = tf.keras.preprocessing.sequence.pad_sequences(
+            sequences=output['sequence'], padding='post',
+            maxlen=sequence_length)
     output['label'] = np.array(output['label'])
     return output
 

@@ -56,10 +56,16 @@ def build_bins(args):
     return bins * tcf
 
 
-def build_vocab(round_factor=10):
+def build_vocab(args, round_factor=10):
     print('Building vocabulary')
-    max_val = 50000
-    vocab = list(range(0, max_val, round_factor))
+    if args.disc_method == 'counter':
+        max_val = 50000
+        step = round_factor
+    else:
+        max_val = args.num_bins
+        step = 1
+
+    vocab = list(range(0, max_val, step))
     print('Number of items in vocabulary: {}'.format(len(vocab)))
     return dict(zip(vocab, range(len(vocab))))
 
@@ -100,7 +106,7 @@ def select_and_concat(data, index1, index2, order=None):
 
 def build_config(args):
     bins = build_bins(args)
-    vocab = build_vocab()
+    vocab = build_vocab(args=args)
     tcf = time_conversion_factor(args.time_unit)
     config = {
         'cas_path': args.cas_path, 'model_dir': args.model_dir,
