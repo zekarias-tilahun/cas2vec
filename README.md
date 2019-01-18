@@ -38,7 +38,7 @@ The time unit used to specify the previous two parameters (possible values are, 
 >`--num-bins:`
 The number of bins (slices). Default is 40
 
->`--sequence-length:`
+>`--seq-len:`
 Sequence length, relevant when the `--disc-method` is 'const'. Default is 100
 
 >`--threshold:`
