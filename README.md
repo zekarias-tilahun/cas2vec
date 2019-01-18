@@ -15,7 +15,9 @@ $ python cas2vec/main.py --cas-path data/train.txt
 
 #### Input format
 Each Line is assoiated with a cascade id followed by a sequence of infection events separated by white space. An infection event contains a pair (node_id, timestamp). For example:
+
 1 1000,0. 47,890. 2,1000., 700,3808, 475,20070
+
 2 3290,0. 9798,10. 90,15., 98,16, 987,20
 
 ### Possible Parameters
