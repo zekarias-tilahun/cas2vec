@@ -157,7 +157,7 @@ def build_config(args):
         str(val) for val in config['fcc_layers']))
     config['model_path'] = os.path.join(
         config['model_dir'],
-        '{}_{}'.format(filter_conf, kernel_conf, fcc_conf))
+        'cas2vec_{}_{}_{}.ckpt'.format(filter_conf, kernel_conf, fcc_conf))
     return config
 
 
