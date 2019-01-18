@@ -117,15 +117,15 @@ def build_mlp(input_, config):
     :return:
     """
     current_input = input_
-    for i in range(len(config['fcc_layers']) - 2):
+    for i in range(len(config['fcc_layers']) - 1):
         current_input = tf.keras.layers.Dense(
             units=config['fcc_layers'][i], activation='tanh',
             name='fcc_layer_{}'.format(i + 1))(current_input)
     cascade_embedding_layer = tf.keras.layers.Dense(
-        units=config['fcc_layers'][-2], activation='tanh',
+        units=config['fcc_layers'][-1], activation='tanh',
         name='cascade_embedding_layer')(current_input)
     prediction_layer = tf.keras.layers.Dense(
-        units=config['fcc_layers'][-1], activation='sigmoid',
+        units=1, activation='sigmoid',
         name='prediction_layer')(cascade_embedding_layer)
     return cascade_embedding_layer, prediction_layer
 

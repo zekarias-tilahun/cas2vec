@@ -111,7 +111,7 @@ def build_config(args):
         'dev_ratio': args.dev_ratio, 'sampling_factor': args.sf,
         'filters': [32, 16] if args.filters is None else args.filters,
         'kernel_size': [3, 4] if args.kernel_size is None else args.kernel_size,
-        'fcc_layers': [512, 128, 1] if args.fcc_layers is None else args.fcc_layers,
+        'fcc_layers': [512, 128] if args.fcc_layers is None else args.fcc_layers,
         'bins': bins, 'disc_method': args.disc_method,
         'vocab': vocab, 'emb_size': args.size, 'learning_rate': args.lr,
         'metrics': [precision, recall, fmeasure],

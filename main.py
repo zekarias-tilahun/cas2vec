@@ -8,7 +8,7 @@ def parser_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--cas-path', type=str, default='',
                         help='A path to the cascade file. Default is empty')
-    parser.add_argument('--model-dir', type=str, default='',
+    parser.add_argument('--model-dir', type=str, default='../models',
                         help='A path to a model directory. If specified, the best model '
                              'based on its performance on the development set will be '
                              'saved to this directory. Default is empty')
@@ -40,10 +40,7 @@ def parser_args():
     parser.add_argument('--size', type=int, default=128,
                         help='Embedding size for the input cascade matrix. '
                              'Default is 128')
-    parser.add_argument('--in-dropout', type=float, default=0.2,
-                        help='Dropout probability at the embedding layer. '
-                             'Default is 0.2')
-    parser.add_argument('--out-dropout', type=float, default=0.4,
+    parser.add_argument('--dropout', type=float, default=0.4,
                         help='Dropout probability at the output layer. '
                              'Default is 0.4')
     parser.add_argument('--filters', nargs='*', type=int,
