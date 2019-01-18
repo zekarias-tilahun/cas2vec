@@ -21,7 +21,7 @@ Each Line is assoiated with a cascade id followed by a sequence of infection eve
 A path to cascade file. Default is empty string.
 
 >`--model-dir:`
-A path to a directory to save a trained model. Default is ```../models```
+A path to a directory to save a trained model. Default is ```./models```
 
 >`--obs-time:`
 An observation time. Default is 1 hour

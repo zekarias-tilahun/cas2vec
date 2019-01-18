@@ -8,7 +8,7 @@ def parser_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--cas-path', type=str, default='',
                         help='A path to the cascade file. Default is empty')
-    parser.add_argument('--model-dir', type=str, default='../models',
+    parser.add_argument('--model-dir', type=str, default='./models',
                         help='A path to a model directory. If specified, the best model '
                              'based on its performance on the development set will be '
                              'saved to this directory. Default is empty')
