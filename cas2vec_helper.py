@@ -158,7 +158,7 @@ def build_config(args):
     config['model_path'] = os.path.join(
         config['model_dir'],
         'cas2vec_{}_{}_{}_{}.ckpt'.format(
-            config[disc_method], filter_conf, kernel_conf, fcc_conf))
+            config['disc_method'], filter_conf, kernel_conf, fcc_conf))
     return config
 
 
