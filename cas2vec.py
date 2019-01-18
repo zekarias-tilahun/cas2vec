@@ -19,7 +19,7 @@ def _build_counter_sequence(events, bins):
         event_count = trace(timestamps, endtime=bins[i]).shape[0]
         if event_count > 0:
             event_count = int(ceilk(event_count, 10))
-            counter_sequence.append(event_count)
+        counter_sequence.append(event_count)
         last_pos = last_pos + event_count
 
     return counter_sequence
@@ -55,6 +55,7 @@ def cas2vec_transform(data, bins, disc_method):
     :param disc_method: discretization method
     :return:
     """
+    print('Transforming cascades according to the {} discretization method'.format(disc_method))
     if disc_method == 'counter':
         sequence_builder = _build_counter_sequence
     else:
@@ -95,13 +96,13 @@ def build_cnn_layer(embedding_layer, config):
     """
     layers = []
     for i in range(len(config['filters'])):
-        cnn_layer = tf.keras.layers.Conv2D(
+        cnn_layer = tf.keras.layers.Conv1D(
             kernel_regularizer=tf.keras.regularizers.l2(0.0001),
             activation='relu', filters=config['filters'][i],
             kernel_size=config['kernel_size'][i],
             name='cnn_layer_{}'.format(i + 1))(embedding_layer)
         pooling_layer = tf.keras.layers.MaxPool1D(
-            name='max_pool_layer')(cnn_layer)
+            name='max_pool_layer_{}'.format(i + 1))(cnn_layer)
         flatten_layer = tf.keras.layers.Flatten(
             name='flatten_{}'.format(i + 1))(pooling_layer)
         layers.append(flatten_layer)
@@ -156,18 +157,19 @@ def cas2vec_model(config):
 def run(processed_cascades, config):
     model_config = cas2vec_model(config)
     print(model_config['model'].summary())
-    # transformed_cascades = cas2vec_transform(
-    #     processed_cascades, config['bins'], disc_method=config['disc_method'])
-    # labels = binarize_labels(labels=np.array(transformed_cascades['label']))
-    # sampling_results = sample(
-    #     labels=labels, sequence_data=transformed_cascades['sequence'],
-    #     factor=config['sampling_factor'])
-    # indices = list(range(sampling_results['sequence'].shape[0]))
-    # random.shuffle(indices)
-    # sequence_inputs = sampling_results['sequence'][indices]
-    # label_inputs = sampling_results['label'][indices]
-    # model_config['model'].fit(
-    #     x=sequence_inputs, y=label_inputs, validation_split=config['dev_ratio'])
+    transformed_cascades = cas2vec_transform(
+        processed_cascades, config['bins'], disc_method=config['disc_method'])
+    labels = binarize_labels(labels=np.array(transformed_cascades['label']))
+    sampling_results = sample(
+        labels=labels, sequence_data=transformed_cascades['sequence'],
+        factor=config['sampling_factor'])
+    indices = list(range(sampling_results['sequence'].shape[0]))
+    random.shuffle(indices)
+    sequence_inputs = sampling_results['sequence'][indices]
+    label_inputs = sampling_results['label'][indices]
+    model_config['model'].fit(
+        x=sequence_inputs, y=label_inputs, validation_split=config['dev_ratio'], 
+        epochs=config['epochs'], batch_size=config['batch_size'])
 
 
 

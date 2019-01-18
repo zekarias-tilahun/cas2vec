@@ -1,3 +1,4 @@
+import tensorflow as tf
 import numpy as np
 import random
 
@@ -26,7 +27,7 @@ def load_cascades(path):
 
 
 def process_observation_prediction_events(cascades, obs_time, prd_time):
-    print('Preparing data ...')
+    print('Processing observation and prediction events ...')
     data = []
     for cid, structural_info, timestamps in cascades:
         events_at_o = trace(timestamps, 0, obs_time)
@@ -40,11 +41,11 @@ def process_observation_prediction_events(cascades, obs_time, prd_time):
 
 
 def time_conversion_factor(time_units):
-    if time_units == 'sec':
+    if time_units == 's':
         return 1.
-    elif time_units == 'hour':
+    elif time_units == 'h':
         return 3600.
-    elif time_units == 'min':
+    elif time_units == 'm':
         return 60.
 
 
@@ -112,9 +113,9 @@ def build_config(args):
         'kernel_size': [3, 4] if args.kernel_size is None else args.kernel_size,
         'fcc_layers': [512, 128, 1] if args.fcc_layers is None else args.fcc_layers,
         'bins': bins, 'disc_method': args.disc_method,
-        'vocab': vocab, 'emb_size': args.size,
+        'vocab': vocab, 'emb_size': args.size, 'learning_rate': args.lr,
         'metrics': [precision, recall, fmeasure],
-        'learning_rate': args.learning_rate
+        'epochs': args.epochs, 'batch_size': args.batch_size
     }
     return config
 
@@ -123,8 +124,8 @@ def init(config):
     cascades = load_cascades(config['cas_path'])
     processed_cascades = process_observation_prediction_events(
         cascades=cascades,
-        obs_time=config['observation-time'],
-        prd_time=config['prediction-time'])
+        obs_time=config['observation_time'],
+        prd_time=config['prediction_time'])
     return processed_cascades
 
 
