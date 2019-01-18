@@ -62,7 +62,7 @@ def build_vocab(args, round_factor=10):
         max_val = 50000
         step = round_factor
     else:
-        max_val = args.num_bins
+        max_val = args.num_bins + 1
         step = 1
 
     vocab = list(range(0, max_val, step))

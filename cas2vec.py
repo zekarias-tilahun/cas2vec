@@ -163,7 +163,8 @@ def run_cas2vec(processed_cascades, config):
     model_config = cas2vec_model(config)
     print(model_config['model'].summary())
     transformed_cascades = cas2vec_transform(
-        processed_cascades, config['bins'], disc_method=config['disc_method'])
+        processed_cascades, config['bins'], disc_method=config['disc_method'],
+        sequence_length=config['sequence_length'])
     labels = binarize_labels(labels=np.array(transformed_cascades['label']))
     sampling_results = sample(
         labels=labels, sequence_data=transformed_cascades['sequence'],
