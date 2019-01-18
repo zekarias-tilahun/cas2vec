@@ -164,6 +164,13 @@ def cas2vec_model(config):
 
 
 def run_cas2vec(processed_cascades, config):
+    """
+    Runs the cas2vec model
+
+    :param processed_cascades:
+    :param config:
+    :return:
+    """
     model_config = cas2vec_model(config)
     print(model_config['model'].summary())
     transformed_cascades = cas2vec_transform(

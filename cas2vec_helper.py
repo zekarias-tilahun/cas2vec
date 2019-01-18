@@ -4,6 +4,12 @@ import random
 
 
 def load_cascades(path):
+    """
+    Reads a cascade from a path
+
+    :param path: The path
+    :return:
+    """
     print('Reading data from {}'.format(path))
     cascades = []
     with open(path, 'r') as f:
@@ -27,16 +33,26 @@ def load_cascades(path):
 
 
 def process_observation_prediction_events(cascades, obs_time, prd_time):
-    print('Processing observation and prediction events ...')
+    """
+    Extracts the sequences of events up to the observation time and computes
+    the number of events at the prediction time
+    :param cascades:
+    :param obs_time:
+    :param prd_time:
+    :return: list: sequence of tuples
+            (cascade id, events up to obs_time, number of events at prd_time)
+    """
+    print('Extracting events up to observation time and counting the number of'
+          'events at the prediction time ...')
     data = []
     for cid, structural_info, timestamps in cascades:
-        events_at_o = trace(timestamps, 0, obs_time)
-        num_obs_events = events_at_o.shape[0]
-        if num_obs_events > 4:
-            structural_info_at_o = structural_info[: num_obs_events]
-            events_at_p = trace(timestamps, 0, prd_time)
-            num_prd_events = events_at_p.shape[0]
-            data.append((cid, structural_info_at_o, events_at_o, num_prd_events))
+        events_up_to_ot = trace(timestamps, 0, obs_time)
+        num_events_at_ot = events_up_to_ot.shape[0]
+        if num_events_at_ot > 4:
+            structural_info_at_ot = structural_info[: num_events_at_ot]
+            events_up_to_pt = trace(timestamps, 0, prd_time)
+            num_events_at_pt = events_up_to_pt.shape[0]
+            data.append((cid, structural_info_at_ot, events_up_to_ot, num_events_at_pt))
     return data
 
 
@@ -79,6 +95,14 @@ def ceilk(num, k=100):
 
 
 def trace(c, starttime=None, endtime=None):
+    """
+    Extract a sequence of events from a cascade between a starting time
+    (included) and an ending time (excluded)
+    :param c: The cascade
+    :param starttime: The starting time
+    :param endtime: The ending time
+    :return:
+    """
     if starttime is None:
         return c[c < endtime]
     elif endtime is None:
@@ -125,11 +149,6 @@ def build_config(args):
         'epochs': args.epochs, 'batch_size': args.batch_size
     }
     return config
-
-
-def pretty_display(args):
-    for arg in vars(args):
-        print('{}: {}'.format(arg, getattr(args, arg)))
 
 
 def binarize_labels(labels, threshold=1000):

@@ -1,6 +1,6 @@
 from cas2vec_helper import (build_config, load_cascades,
                             process_observation_prediction_events)
-from cas2vec import run_cas2vec, cas2vec_model
+from cas2vec import run_cas2vec
 import argparse
 
 
