@@ -134,7 +134,7 @@ def build_config(args):
     vocab = build_vocab(args=args)
     tcf = time_conversion_factor(args.time_unit)
     config = {
-        'cas_path': args.cas_path,
+        'cas_path': args.cas_path, 'model_dir': args.model_dir,
         'time_unit': args.time_unit, 'num_bins': args.num_bins,
         'observation_time': args.obs_time * tcf,
         'prediction_time': args.prd_time * tcf,
