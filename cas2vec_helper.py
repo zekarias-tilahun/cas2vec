@@ -146,7 +146,7 @@ def build_config(args):
         'fcc_layers': [512, 128] if args.fcc_layers is None else args.fcc_layers,
         'bins': bins, 'disc_method': args.disc_method,
         'vocab': vocab, 'emb_size': args.size, 'learning_rate': args.lr,
-        'metrics': [precision, recall, fmeasure],
+        'metrics': [precision, recall, fmeasure], 'dropout': args.dropout,
         'epochs': args.epochs, 'batch_size': args.batch_size
     }
     filter_conf = 'filter_{}'.format('_'.join(

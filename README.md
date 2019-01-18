@@ -43,7 +43,7 @@ Default is 16 hours
 >`--time-unit:`
 The time unit used to specify the previous two parameters (possible values are, h for hour, m for minute, and s for second). Default is 'h'
 
->`--disc_method:`
+>`--disc-method:`
  The discretization method to be used possible values are (counter, const). Default is counter.
 
 >`--num-bins:`
