@@ -1,5 +1,9 @@
 # Cas2Vec
-Implementation of the Cas2Vec algorithm as described in the paper, [Network-Agnostic Cascade Prediction in Online Social Networks](https://ieeexplore.ieee.org/document/8554730). In this paper we investigate how one can effectively do virality prediction without requiring knowledge of the underlying nework. The complete detail is given in our paper. The source code contains minor changes for some terms used in the paper and we have included an inline documentation for the such changes. Eg. slices are named as bins.
+Implementation of the Cas2Vec algorithm as described in the paper, [Network-Agnostic Cascade Prediction in Online Social Networks](https://ieeexplore.ieee.org/document/8554730). 
+In this paper we investigate how one can effectively do virality prediction without requiring knowledge of the underlying nework. 
+The complete detail is given in our paper. 
+The source code contains minor changes for some terms used in the paper and we have included an inline documentation for such changes. 
+Eg. slices are named as bins.
 ### Requirements!
   - Tensorflow 1.5+
   - Numpy
