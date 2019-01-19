@@ -136,7 +136,7 @@ def build_mlp(input_, config):
         name='cascade_embedding_layer')(current_input)
     cascade_embedding_layer_do = tf.keras.layers.Dropout(
         rate=config['dropout'],
-        name='embedding_dropout'.format(i + 1))(cascade_embedding_layer)
+        name='cascade_embedding_dropout')(cascade_embedding_layer)
     prediction_layer = tf.keras.layers.Dense(
         units=1, activation='sigmoid',
         name='prediction_layer')(cascade_embedding_layer_do)
@@ -156,7 +156,7 @@ def cas2vec_model(config):
     model = tf.keras.models.Model(
         inputs=input_layer, outputs=prediction_layer)
     cascade_embedding_predictor = tf.keras.models.Model(
-        inputs=input_layer, outputs=prediction_layer)
+        inputs=input_layer, outputs=cascade_embedding_layer)
 
     model.compile(
         optimizer=tf.train.AdamOptimizer(config['learning_rate']),
